@@ -6,4 +6,5 @@ const userRouter = express.Router()
 
 userRouter.post("/register",createUser)
 
+
 module.exports = userRouter
