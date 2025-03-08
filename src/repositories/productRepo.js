@@ -11,6 +11,25 @@ const registerProduct = async(productPerameters)=>{
 
 }
 
+const getProductById = async(productId)=>{
+    try {
+        const result = await Product.findById(productId)
+        return result
+    } catch (error) {
+        console.log("error while get the product",error)
+    }
+}
+const deleteProductById = async(productId)=>{
+    try {
+        const result = await Product.findByIdAndDelete(productId)
+        return result
+    } catch (error) {
+        console.log("error while get the product",error)
+    }
+}
+
 module.exports = {
-    registerProduct
+    registerProduct,
+    getProductById,
+    deleteProductById
 }
