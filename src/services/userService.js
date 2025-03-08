@@ -9,13 +9,14 @@ const userService = async(userDetails)=>{
         throw({message:"User email is already exist",statusCode:400})
     }
     
-
+   
     const newUser = await registerUser({
         firstName:userDetails.firstName,
         lastName:userDetails.lastName,
         email:userDetails.email,
         password:userDetails.password,
-        mobileNumber:userDetails.mobileNumber
+        mobileNumber:userDetails.mobileNumber,
+        role:userDetails.role
     })
 
     if(!newUser){

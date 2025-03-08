@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = require("../config/serverConfig");
 const isLoggedIn = async(req,res,next)=>{
+   try {
     const token = req.cookies["authToken"];
     if(!token){
         return res.status(404).json({
@@ -19,9 +20,39 @@ const isLoggedIn = async(req,res,next)=>{
             data:{}
         })
     }
+    req.user = {
+        email : decoded.email,
+        id :decoded.id,
+        role :decoded.role
+    }
+   } catch (error) {
+    return res.status(404).json({
+        message:"Unauthorized user,user token is expired",
+        error:error,
+        success:false,
+        data:{}
+    })
+   }
     next()
 }
 
+
+const isAdmin = (req,res,next)=>{
+    const loggedInUserRole = req.user.role 
+    if(loggedInUserRole === "ADMIN"){
+        next()
+    }else{
+        return res.status(401).json({
+            message:"Unauthorized user,Admin can perform this action",
+            error:"User can't perform this action ",
+            success:false,
+            data:{}
+        }) 
+    }
+}
+
+
 module.exports = {
-    isLoggedIn
+    isLoggedIn,
+    isAdmin
 }

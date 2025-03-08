@@ -6,6 +6,7 @@ const createProduct = async(req,res)=>{
             imagePath:req.file.path,
             productDetails:req.body
         }
+        console.log('create product is',productDetails)
         const response = await productService(productDetails)
         return res.status(201).json({
             message:"product is successfully registered",
@@ -43,8 +44,6 @@ const getProduct = async(req,res)=>{
     })
    }
 }
-
-
 const deleteProduct = async(req,res)=>{
     try {
      const productId = req.params.id;

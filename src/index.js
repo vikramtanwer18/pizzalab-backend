@@ -21,7 +21,7 @@ app.use('/users/auth',authRouter)
 app.use("/products",proudctRouter)
 
 app.post("/ping",upload.single("testFile"), async(req,res)=>{
-    console.log(req.body)
+    console.log(req.file?.path)
     const uploadResult = await cloudinary.uploader
        .upload(
         req.file.path  

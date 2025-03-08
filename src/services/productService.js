@@ -1,6 +1,7 @@
 const { registerProduct, getProductById ,deleteProductById} = require("../repositories/productRepo");
 const cloudinary = require("../config/cloudinaryConfig");
 const fs = require("fs/promises");
+
 const productService = async ({ productDetails, imagePath }) => {
   try {
     const uploadResult = await cloudinary.uploader

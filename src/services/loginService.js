@@ -13,7 +13,8 @@ const loginService = async(userDetails)=>{
     if(!isValidPassword){
         throw({message:"Unauthorized user",statusCode:401}) 
     }
-    const token = await jwt.sign({email:user.email,id:user._id},config.JWT_SECRET_KEY,{expiresIn:config.JWT_EXPIRY})
+    const role = user.role ? user.role :"USER"
+    const token = await jwt.sign({email:user.email,id:user._id, role:role },config.JWT_SECRET_KEY,{expiresIn:config.JWT_EXPIRY})
     return token
   } catch (error) {
     console.log('error while generating token ',error)

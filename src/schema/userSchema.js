@@ -35,11 +35,11 @@ const userSchema = new mongoose.Schema({
         trim:true,
         maxlength:[10,'max length of password should be eqal to or less than 10'],
     },
-    // role:{
-    //     type:String,
-    //     enum:['USER',"ADMIN"],
-    //     default:"USER"
-    // },
+    role:{
+        type:String,
+        enum:['USER',"ADMIN"],
+        default:"USER"
+    },
 
     // address:{
     //     type:String
