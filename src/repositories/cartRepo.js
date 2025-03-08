@@ -11,7 +11,7 @@ const registerCart = async(userId)=>{
 
 const getCartByUserId = async(userId)=>{
     try {
-        const result = await Cart.findOne(userId)
+        const result = await Cart.findOne(userId).populate('items.product')
         return result
     } catch (error) {
         console.log("error while get the cart",error)
