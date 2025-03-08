@@ -9,6 +9,7 @@ const { isLoggedIn } = require('./validation/authValidation');
 const upload = require('./middleware/multerMiddleware');
 const cloudinary = require("./config/cloudinaryConfig");
 const proudctRouter = require('./routes/productRoute');
+const cartRouter = require('./routes/cartRoute');
 const app = express();
 app.use(cookieParser())
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use(express.urlencoded({extended:true}))
 app.use('/users',userRouter)
 app.use('/users/auth',authRouter)
 app.use("/products",proudctRouter)
+app.use("/cart",cartRouter)
 
 app.post("/ping",upload.single("testFile"), async(req,res)=>{
     console.log(req.file?.path)

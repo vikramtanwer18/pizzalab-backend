@@ -1,3 +1,4 @@
+const { registerCart } = require("../repositories/cartRepo")
 const { findUser, registerUser } = require("../repositories/userRepo")
 
 const userService = async(userDetails)=>{
@@ -8,8 +9,6 @@ const userService = async(userDetails)=>{
     if (user){
         throw({message:"User email is already exist",statusCode:400})
     }
-    
-   
     const newUser = await registerUser({
         firstName:userDetails.firstName,
         lastName:userDetails.lastName,
@@ -22,6 +21,7 @@ const userService = async(userDetails)=>{
     if(!newUser){
         throw({message:"Something went wrong user can't be register",statusCode:500})
     }
+    const cart = await registerCart({user:newUser._id})
 
     return newUser
 
