@@ -1,14 +1,13 @@
-const { loginService } = require("../services/loginService")
-const loginUser = async(req,res)=>{
+
+const logoutUser = async(req,res)=>{
    try {
-    const response = await loginService(req.body)
-    res.cookie("authToken",response,{
+    res.cookie("authToken","",{
         httpOnly:true,
         secure:false,
         maxAge:1*24*60*60*1000
     })
     res.status(200).json({
-        message:"User successfully login",
+        message:"User successfully logout",
         data:{},
         error:{},
         success:true
@@ -24,5 +23,5 @@ const loginUser = async(req,res)=>{
 }
 
 module.exports = {
-    loginUser
+    logoutUser
 }
