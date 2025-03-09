@@ -18,7 +18,19 @@ const getCartByUserId = async(userId)=>{
     }
 }
 
+const clearCartById= async(userId)=>{
+   try {
+    const cart = await Cart.findOne(userId)
+    cart.items = []
+    await cart.save()
+   return cart
+   } catch (error) {
+    console.log("error while clear the cart",error)
+   }
+}
+
 module.exports = {
     registerCart,
-    getCartByUserId
+    getCartByUserId,
+    clearCartById
 }

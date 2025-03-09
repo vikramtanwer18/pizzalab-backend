@@ -1,4 +1,4 @@
-const { getCartByUserId } = require("../repositories/cartRepo")
+const { getCartByUserId, clearCartById } = require("../repositories/cartRepo")
 const { getProductService } = require("./productService")
 const getCart = async(userId)=>{
     const cart = await getCartByUserId({user:userId})
@@ -52,7 +52,16 @@ const modifyToCart = async(userId,productId, isAddProduct)=>{
 }
 
 
+const clearCart = async(userId)=>{
+    const cart = await clearCartById({user:userId})
+    if(!cart){
+        thow({message:"something went wrong cart is not clear",statusCode:500})
+    }
+    return cart
+}
+
 module.exports = {
     getCart ,
-    modifyToCart
+    modifyToCart,
+    clearCart
 }
