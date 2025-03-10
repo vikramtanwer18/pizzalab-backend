@@ -1,13 +1,9 @@
 const express = require('express');
 const cookieParser = require("cookie-parser")
 const serverConfig = require('./config/serverConfig')
-const fs = require("fs/promises")
 const connectDB = require('./config/dbConfig');
 const userRouter = require('./routes/userRoute');
 const authRouter = require('./routes/authRoute');
-const { isLoggedIn } = require('./validation/authValidation');
-const upload = require('./middleware/multerMiddleware');
-const cloudinary = require("./config/cloudinaryConfig");
 const proudctRouter = require('./routes/productRoute');
 const cartRouter = require('./routes/cartRoute');
 const orderRouter = require('./routes/orderRoute');
@@ -23,18 +19,7 @@ app.use('/users/auth',authRouter)
 app.use("/products",proudctRouter)
 app.use("/carts",cartRouter)
 app.use('/orders',orderRouter)
-
-app.post("/ping",upload.single("testFile"), async(req,res)=>{
-    console.log(req.file?.path)
-    const uploadResult = await cloudinary.uploader
-       .upload(
-        req.file.path  
-       )
-       .catch((error) => {
-           console.log(error);
-       });
-       await fs.unlink(req.file.path)
- 
+app.post("/ping",async(req,res)=>{
     res.send({
         message:"Pong"
     })
