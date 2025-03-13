@@ -5,6 +5,7 @@ const logoutUser = async(req,res)=>{
     res.cookie("authToken","",{
         httpOnly:true,
         secure:true,
+        sameSite: 'None',
         maxAge:1*24*60*60*1000
     })
     res.status(200).json({
