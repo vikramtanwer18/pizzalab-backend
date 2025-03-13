@@ -4,7 +4,7 @@ const logoutUser = async(req,res)=>{
     console.log(req.cookies)
     res.cookie("authToken","",{
         httpOnly:true,
-        secure:false,
+        secure:true,
         maxAge:1*24*60*60*1000
     })
     res.status(200).json({
