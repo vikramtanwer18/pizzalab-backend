@@ -8,12 +8,6 @@ const proudctRouter = require('./routes/productRoute');
 const cartRouter = require('./routes/cartRoute');
 const orderRouter = require('./routes/orderRoute');
 const cors = require("cors");
-const upload = require('./middleware/multerMiddleware');
-const app = express();
-app.use(cookieParser())
-app.use(express.json())
-app.use(express.text())
-app.use(express.urlencoded({extended:true}))
 
 app.use(cors({
     origin:serverConfig.FRONTEND_URL,
@@ -21,6 +15,14 @@ app.use(cors({
     credentials: true,
     
 }))
+const upload = require('./middleware/multerMiddleware');
+const app = express();
+app.use(cookieParser())
+app.use(express.json())
+app.use(express.text())
+app.use(express.urlencoded({extended:true}))
+
+
 app.use('/users',userRouter)
 app.use('/users/auth',authRouter)
 app.use("/products",proudctRouter)
