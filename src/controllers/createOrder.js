@@ -4,8 +4,8 @@ const {createOrderService, getOrders, getOrderById, updateOrder} = require("../s
 
 const createOrder = async(req,res)=>{
     try {
-      
-        const response = await createOrderService(req.user.id,req.body.paymentMethod)
+        console.log("order in the controller",req.body)
+        const response = await createOrderService(req.user.id,req.body.paymentMethod,req.body.address)
         return res.status(201).json({
             message:"Order is successfully created",
             success:true,

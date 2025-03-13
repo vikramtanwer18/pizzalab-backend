@@ -12,6 +12,7 @@ const isLoggedIn = async(req,res,next)=>{
         })
     }
     const decoded = jwt.verify(token,JWT_SECRET_KEY);
+   
     if(!decoded){
         return res.status(404).json({
             message:"Unauthorized user,",
@@ -26,7 +27,12 @@ const isLoggedIn = async(req,res,next)=>{
         role :decoded.role
     }
    } catch (error) {
-    return res.status(404).json({
+    res.cookie("authToken","",{
+        httpOnly:true,
+        secure:false,
+        maxAge:1*24*60*60*1000
+    })
+    return res.status(401).json({
         message:"Unauthorized user,user token is expired",
         error:error,
         success:false,

@@ -2,7 +2,7 @@ const {registerOrder, getOrderByUserId, updateOrderstatus, getOrderByOrderId } =
 const { findUser } = require("../repositories/userRepo");
 const { getCart, clearCart } = require("./cartService");
 
-const createOrderService = async(userId,paymentMethod)=>{
+const createOrderService = async(userId,paymentMethod,address)=>{
     const cart = await getCart(userId);
     const user = await findUser({_id:userId})
     const orderObj = {}
@@ -20,10 +20,10 @@ const createOrderService = async(userId,paymentMethod)=>{
     cart.items.forEach(item=>{
         orderObj.totalPrice =  item.product.price * item.quantity
     })
-
-    orderObj.address = user.address;
+    
     orderObj.paymentMethod = paymentMethod
-
+    orderObj.address = user.address ? user.address:address;
+    orderObj.paymentMethod = paymentMethod
 
     const order = await registerOrder(orderObj);
 

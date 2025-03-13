@@ -16,7 +16,8 @@ const registerUser = async(perameters)=>{
         console.log('result',result)
         return result
     } catch (error) {
-        console.log('db error',error)
+        const message = Object.values(error.errors).map(value => value.message);
+        console.log(message)
     }
 }
 

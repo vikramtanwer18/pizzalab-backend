@@ -1,4 +1,4 @@
-const { registerProduct, getProductById ,deleteProductById} = require("../repositories/productRepo");
+const { registerProduct, getProductById ,deleteProductById,getAllProducts} = require("../repositories/productRepo");
 const cloudinary = require("../config/cloudinaryConfig");
 const fs = require("fs/promises");
 
@@ -27,7 +27,13 @@ const productService = async ({ productDetails, imagePath }) => {
     console.log("error creating the product ", error);
   }
 };
-
+const getAllProductsService = async ()=>{
+  const product =  await getAllProducts()
+  if(!product){
+   throw({message:"Something went wrong product is not fetched",statusCode:500})
+  }
+  return product
+}
 
 const getProductService = async (productId)=>{
    const product =  await getProductById({_id:productId})
@@ -50,5 +56,6 @@ const deleteProductService = async (productId)=>{
 module.exports = {
   productService,
   getProductService,
-  deleteProductService
+  deleteProductService,
+  getAllProductsService
 };

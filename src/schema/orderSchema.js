@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema({
 
     address:{
         type:String,
-        minlength:[10,'address should be equal  or greater than 10 ']  
+        // minlength:[10,'address should be equal  or greater than 10 ']  
     },
     status:{
         type:String,

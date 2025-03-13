@@ -4,13 +4,13 @@ const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
         required:[true ,"user firstName should be provided"],
-        maxlength:[10,'max length of character should be eqal to or less than 10'],
+        maxlength:[10,'firstName,max length of character should be eqal to or less than 10'],
         lowercase:true,
         trim:true
     },
     lastName:{
         type:String,
-        maxlength:[10,'max length of character should be eqal to or less than 10'],
+        maxlength:[10,'lastName,max length of character should be eqal to or less than 10'],
         lowercase: true,
         trim:true
     },

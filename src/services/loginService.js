@@ -15,7 +15,10 @@ const loginService = async(userDetails)=>{
     }
     const role = user.role ? user.role :"USER"
     const token = await jwt.sign({email:user.email,id:user._id, role:role },config.JWT_SECRET_KEY,{expiresIn:config.JWT_EXPIRY})
-    return token
+    return ({token,role,userData:{
+      email :user.email,
+      firstName:user.firstName
+    }})
   } catch (error) {
     console.log('error while generating token ',error)
   }
