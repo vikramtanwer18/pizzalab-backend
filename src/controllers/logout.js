@@ -1,7 +1,6 @@
 
 const logoutUser = async(req,res)=>{
    try {
-    console.log(req.cookies)
     res.cookie("authToken","",{
         httpOnly:true,
         secure:true,

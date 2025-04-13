@@ -11,7 +11,7 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors({
-    origin:serverConfig.FRONTEND_URL,
+    origin:[serverConfig.FRONTEND_URL,'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     credentials: true,
     
